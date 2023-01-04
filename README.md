@@ -6,9 +6,9 @@
 
 ### 로그인 / 회원가입
 
-- [ ] 이메일 input
-- [ ] 비밀번호 input
-- [ ] 제출 button
+- [x] 이메일 input
+- [x] 비밀번호 input
+- [x] 제출 button
 
 ### Todo App
 
