@@ -15,5 +15,9 @@ export const useForm = <T>(initialForm: T) => {
     });
   };
 
-  return { form, onFormChange };
+  const initializeForm = () => {
+    setForm(initialForm);
+  };
+
+  return { form, onFormChange, initializeForm };
 };
