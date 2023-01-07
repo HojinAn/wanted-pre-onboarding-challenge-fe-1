@@ -1,8 +1,7 @@
 import { ChangeEvent, useState } from 'react';
-import { LoginForm } from '@/types';
 
-export const useForm = () => {
-  const [form, setForm] = useState<LoginForm>({ email: '', password: '' });
+export const useForm = <T>(initialForm: T) => {
+  const [form, setForm] = useState(initialForm);
 
   const onFormChange = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>

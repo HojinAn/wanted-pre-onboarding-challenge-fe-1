@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import { Stack, Button, TextField, Container, Box } from '@mui/material';
 
 import { useAuth, useForm } from '@/hooks';
+import { LoginForm } from '@/types';
 
 const Login = () => {
-  const { form, onFormChange } = useForm();
+  const { form, onFormChange } = useForm<LoginForm>({
+    email: '',
+    password: '',
+  });
   const { email, password } = form;
   const { validateEmail, validatePassword, mutateLogin } = useAuth();
 
