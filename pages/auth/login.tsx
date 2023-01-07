@@ -1,13 +1,17 @@
 import { Stack, Button, TextField, Container, Box } from '@mui/material';
-import { useForm } from '@/hooks';
-import { useEffect } from 'react';
+import { useAuth, useForm } from '@/hooks';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
   const { form, onFormChange } = useForm();
+  const { email, password } = form;
+  const { validateEmail, validatePassword } = useAuth();
+
+  const [valid, setValid] = useState(false);
 
   useEffect(() => {
-    console.log(form);
-  });
+    setValid(validateEmail(email) && validatePassword(password));
+  }, [email, password, validateEmail, validatePassword]);
 
   return (
     <Container maxWidth="sm">
@@ -33,7 +37,7 @@ const Login = () => {
           required
           onChange={onFormChange}
         />
-        <Button variant="contained" sx={{ mt: 2 }}>
+        <Button variant="contained" sx={{ mt: 2 }} disabled={!valid}>
           제출
         </Button>
       </Stack>

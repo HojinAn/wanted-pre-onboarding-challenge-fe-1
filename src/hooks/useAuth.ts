@@ -6,4 +6,6 @@ export const useAuth = () => {
   const validatePassword = (password: string) => {
     return password.length >= 8;
   };
+
+  return { validateEmail, validatePassword };
 };
