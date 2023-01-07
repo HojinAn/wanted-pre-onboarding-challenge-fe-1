@@ -3,4 +3,12 @@ type LoginSuccess = {
   token: string;
 };
 
-export type { LoginSuccess };
+type TodoResponse = {
+  title: string;
+  content: string;
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type { LoginSuccess, TodoResponse };

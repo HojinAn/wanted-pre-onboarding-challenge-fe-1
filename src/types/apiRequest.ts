@@ -3,4 +3,9 @@ type LoginForm = {
   password: string;
 };
 
-export type { LoginForm };
+type TodoRequest = {
+  title: string;
+  content: string;
+};
+
+export type { LoginForm, TodoRequest };
