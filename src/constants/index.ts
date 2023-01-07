@@ -7,3 +7,7 @@ export const API_URLS = {
 };
 
 export const TOKEN = 'token';
+
+export const QUERY_KEYS = {
+  todos: 'todos',
+};
