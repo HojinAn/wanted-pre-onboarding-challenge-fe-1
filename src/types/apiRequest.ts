@@ -1,11 +1,11 @@
-type LoginForm = {
+type LoginFormType = {
   email: string;
   password: string;
 };
 
-type TodoRequest = {
+type TodoRequestType = {
   title: string;
   content: string;
 };
 
-export type { LoginForm, TodoRequest };
+export type { LoginFormType, TodoRequestType };

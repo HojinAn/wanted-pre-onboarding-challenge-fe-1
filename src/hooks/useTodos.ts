@@ -1,6 +1,6 @@
 import { apiInstance } from '@/api';
 import { API_ENDPOINT, API_URLS, QUERY_KEYS } from '@/constants';
-import { TodoRequest, TodoResponse } from '@/types';
+import { TodoRequestType, TodoResponseType } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useTodos = () => {
@@ -11,12 +11,12 @@ export const useTodos = () => {
       .get(API_ENDPOINT + API_URLS.todos)
       .then(({ data }) => data.data);
 
-  const createTodo = (todo: TodoRequest) =>
+  const createTodo = (todo: TodoRequestType) =>
     apiInstance()
       .post(API_ENDPOINT + API_URLS.todos, todo)
       .then(({ data }) => data.data);
 
-  const { data: todoDatas } = useQuery<TodoResponse[]>([QUERY_KEYS.todos], {
+  const { data: todoDatas } = useQuery<TodoResponseType[]>([QUERY_KEYS.todos], {
     queryFn: getTodos,
   });
 
@@ -24,11 +24,10 @@ export const useTodos = () => {
     mutationFn: createTodo,
     onSuccess: (data) => {
       client.setQueryData([QUERY_KEYS.todos, data.id], data);
-      todoDatas?.push(data);
+      // todoDatas?.push(data);
+      client.invalidateQueries([QUERY_KEYS.todos])
     },
   });
-
-  
 
   return { todoDatas, mutateTodo };
 };

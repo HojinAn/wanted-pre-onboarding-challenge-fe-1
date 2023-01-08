@@ -1,9 +1,9 @@
-type LoginSuccess = {
+type LoginSuccessType = {
   message: string;
   token: string;
 };
 
-type TodoResponse = {
+type TodoResponseType = {
   title: string;
   content: string;
   id: string;
@@ -11,4 +11,4 @@ type TodoResponse = {
   updatedAt: string;
 };
 
-export type { LoginSuccess, TodoResponse };
+export type { LoginSuccessType, TodoResponseType };

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { API_ENDPOINT, API_URLS, TOKEN } from '@/constants';
 import { ROUTES } from '@/routes';
-import { LoginForm, LoginSuccess } from '@/types';
+import { LoginFormType, LoginSuccessType } from '@/types';
 
 export const useAuth = () => {
   const router = useRouter();
@@ -17,13 +17,13 @@ export const useAuth = () => {
     return password.length >= 8;
   };
 
-  const postLogin = (form: LoginForm) =>
+  const postLogin = (form: LoginFormType) =>
     axios.post(API_ENDPOINT + API_URLS.login, form).then(({ data }) => data);
 
-  const postSignUp = (form: LoginForm) =>
+  const postSignUp = (form: LoginFormType) =>
     axios.post(API_ENDPOINT + API_URLS.signUp, form).then(({ data }) => data);
 
-  const handleLoginSuccess = ({ message, token }: LoginSuccess) => {
+  const handleLoginSuccess = ({ message, token }: LoginSuccessType) => {
     alert(message);
     localStorage.setItem(TOKEN, token);
     router.push(ROUTES.root);
