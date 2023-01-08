@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 export const useForm = <T>(initialForm: T) => {
   const [form, setForm] = useState(initialForm);
@@ -19,5 +19,11 @@ export const useForm = <T>(initialForm: T) => {
     setForm(initialForm);
   };
 
-  return { form, onFormChange, initializeForm };
+  const onSubmitForm = (mutateFn: Function) => (e: FormEvent) => {
+    e.preventDefault();
+    mutateFn(form);
+    initializeForm();
+  };
+
+  return { form, onFormChange, onSubmitForm };
 };
