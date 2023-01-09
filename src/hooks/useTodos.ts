@@ -24,8 +24,7 @@ export const useTodos = () => {
     mutationFn: createTodo,
     onSuccess: (data) => {
       client.setQueryData([QUERY_KEYS.todos, data.id], data);
-      // todoDatas?.push(data);
-      client.invalidateQueries([QUERY_KEYS.todos])
+      client.invalidateQueries([QUERY_KEYS.todos]);
     },
   });
 

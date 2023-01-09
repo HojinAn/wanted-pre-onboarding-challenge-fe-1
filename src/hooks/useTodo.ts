@@ -3,7 +3,7 @@ import { API_ENDPOINT, API_URLS, QUERY_KEYS } from '@/constants';
 import { TodoRequestType, TodoResponseType } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-export const useTodo = (todoInfo: TodoResponseType) => {
+export const useTodo = (todoInfo: TodoResponseType, closeFn:()=>void) => {
   const { id: todoId } = todoInfo;
   const client = useQueryClient();
 
@@ -25,8 +25,9 @@ export const useTodo = (todoInfo: TodoResponseType) => {
   const { mutate: mutateDeleteTodo } = useMutation({
     mutationFn: deleteTodo,
     onSuccess: () => {
-      client.invalidateQueries([QUERY_KEYS.todos]);
+      closeFn();
       client.removeQueries([QUERY_KEYS.todos, todoId]);
+      client.invalidateQueries([QUERY_KEYS.todos]);
     },
   });
   const { mutate: mutateUpdateTodo } = useMutation({
