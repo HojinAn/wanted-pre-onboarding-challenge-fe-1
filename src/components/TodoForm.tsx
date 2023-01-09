@@ -1,15 +1,21 @@
 import React from 'react';
 import { Stack, TextField, Button, Box } from '@mui/material';
 
-import { useForm, useTodos } from '@/hooks';
+import { useForm } from '@/hooks';
 import { TodoRequestType } from '@/types';
 
-export const TodoForm = () => {
-  const { mutateTodo } = useTodos();
-  const { onFormChange, form, onSubmitForm } = useForm<TodoRequestType>({
+export const TodoForm = ({
+  defaultForm = {
     title: '',
     content: '',
-  });
+  },
+  mutateFn,
+}: {
+  defaultForm?: TodoRequestType;
+  mutateFn: (form: TodoRequestType) => void;
+}) => {
+  const { onFormChange, form, onSubmitForm } =
+    useForm<TodoRequestType>(defaultForm);
   const { title, content } = form;
 
   return (
@@ -17,7 +23,7 @@ export const TodoForm = () => {
       <Box component={'h3'} sx={{ display: 'flex', justifyContent: 'center' }}>
         Todo 작성
       </Box>
-      <Stack component="form" onSubmit={onSubmitForm(mutateTodo)}>
+      <Stack component="form" onSubmit={onSubmitForm(mutateFn)}>
         <TextField
           label="할일"
           variant="standard"
@@ -32,7 +38,6 @@ export const TodoForm = () => {
           name="content"
           onChange={onFormChange}
           value={content}
-          multiline
         />
         <Button variant="contained" sx={{ mt: 2 }} type="submit">
           제출
