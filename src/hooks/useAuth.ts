@@ -29,6 +29,10 @@ export const useAuth = () => {
     router.push(ROUTES.root);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem(TOKEN);
+  };
+
   const { mutate: mutateLogin } = useMutation({
     mutationFn: postLogin,
     onSuccess: (data) => {
@@ -42,5 +46,11 @@ export const useAuth = () => {
     },
   });
 
-  return { validateEmail, validatePassword, mutateLogin, mutateSignUp };
+  return {
+    validateEmail,
+    validatePassword,
+    mutateLogin,
+    mutateSignUp,
+    handleLogout,
+  };
 };
