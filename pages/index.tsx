@@ -3,15 +3,11 @@ import Link from 'next/link';
 import { Button } from '@mui/material';
 
 import { ROUTES } from '@/routes';
-import { TOKEN } from '@/constants';
-import { TodoForm, TodoList } from '@/components';
+import { TodoList } from '@/components';
+import { useAuth } from '@/hooks';
 
 export default function Home() {
-  const [isOpenedTodoForm, setIsOpenedTodoForm] = useState(false);
-
-  const toggleIsOpenedTodoForm = () => {
-    setIsOpenedTodoForm(!isOpenedTodoForm);
-  };
+  const { handleLogout } = useAuth();
 
   return (
     <>
@@ -21,15 +17,10 @@ export default function Home() {
       <Button variant="contained" href={ROUTES.signUp} LinkComponent={Link}>
         회원가입
       </Button>
-      <Button
-        variant="contained"
-        onClick={() => localStorage.removeItem(TOKEN)}
-      >
+      <Button variant="contained" onClick={handleLogout}>
         로그아웃
       </Button>
-      <Button onClick={toggleIsOpenedTodoForm}>할 일 추가</Button>
 
-      {isOpenedTodoForm && <TodoForm />}
       <TodoList />
     </>
   );
